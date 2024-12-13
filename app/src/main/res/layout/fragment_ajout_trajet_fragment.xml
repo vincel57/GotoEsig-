@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Moyen de transport -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moyen de transport"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_transport"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:spinnerMode="dropdown" />
+
+        <!-- Point de départ -->
+        <EditText
+            android:id="@+id/edit_point_depart"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:hint="Point de départ" />
+
+        <!-- Date -->
+        <EditText
+            android:id="@+id/edit_date"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Date (JJ/MM/AAAA)" />
+
+        <!-- Heure -->
+        <EditText
+            android:id="@+id/edit_heure"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Heure (HH:MM)" />
+
+        <!-- Retard toléré -->
+        <EditText
+            android:id="@+id/edit_retard_tolere"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Retard toléré (en minutes)"
+            android:inputType="number" />
+
+        <!-- Nombre de places disponibles -->
+        <EditText
+            android:id="@+id/edit_places"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Nombre de places disponibles"
+            android:inputType="number" />
+
+        <!-- Contribution demandée (uniquement pour véhicule) -->
+        <EditText
+            android:id="@+id/edit_contribution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contribution demandée (€)"
+            android:visibility="gone"
+            android:inputType="numberDecimal" />
+
+        <!-- Bouton de validation -->
+        <Button
+            android:id="@+id/btn_valider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Valider" />
+        <TextView
+            android:id="@+id/editDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Distance" />
+
+        <TextView
+            android:id="@+id/editDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Durée" />
+
+        <TextView
+            android:id="@+id/editEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="email" />
+
+
+    </LinearLayout>
+</ScrollView>
