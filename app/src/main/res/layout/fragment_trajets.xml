@@ -4,7 +4,7 @@
     android:id="@+id/relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrajetsFragment">
+    tools:context=".Fragments.TrajetsFragment">
 
     <!-- AppBar avec Toolbar -->
     <com.google.android.material.appbar.AppBarLayout

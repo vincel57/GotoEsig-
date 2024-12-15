@@ -3,58 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Mes_trajets_fragment">
+    tools:context=".Fragments.Mes_trajets_fragment">
 
 
-    <androidx.cardview.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/blue_gradient_start">
-
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/point_depart_arrivee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Paris ➜ Washington"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/date_heure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vendredi 20 décembre 2024 13:25 - 16:15"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/duree_totale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Durée totale : 8h50"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-
-
-
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/recyclerview"
+       android:padding="16dp"
+       android:scrollbars="vertical"
+       android:clipToPadding="false"/>
 </FrameLayout>

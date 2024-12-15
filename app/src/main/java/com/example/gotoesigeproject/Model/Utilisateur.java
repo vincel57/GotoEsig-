@@ -1,4 +1,4 @@
-package com.example.gotoesigeproject;
+package com.example.gotoesigeproject.Model;
 
 public class Utilisateur {
 

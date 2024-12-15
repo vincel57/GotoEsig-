@@ -1,6 +1,6 @@
-package com.example.gotoesigeproject;
+package com.example.gotoesigeproject.Model;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Trajet {
     private String pointDepart;
@@ -11,7 +11,8 @@ public class Trajet {
     private String contribution;
     private String duree;
     private String distance;
-    private String email; // Nouvel attribut pour l'ID utilisateur
+    private String email;
+    private ArrayList<String> inscrits;
 
 
 
@@ -19,8 +20,7 @@ public class Trajet {
     public Trajet() {
     }
 
-    // Constructeur avec arguments
-    public Trajet(String pointDepart, String date, String heure, String retardTolere, String places, String contribution, String duree, String distance, String email) {
+    public Trajet(String pointDepart, String date, String heure, String retardTolere, String places, String contribution, String duree, String distance, String email, ArrayList<String> inscrits) {
         this.pointDepart = pointDepart;
         this.date = date;
         this.heure = heure;
@@ -30,9 +30,8 @@ public class Trajet {
         this.duree = duree;
         this.distance = distance;
         this.email = email;
+        this.inscrits = inscrits;
     }
-
-
 
     // Getters et Setters pour chaque champ
     public String getPointDepart() {
@@ -69,6 +68,14 @@ public class Trajet {
 
     public String getPlaces() {
         return places;
+    }
+
+    public ArrayList<String> getInscrits() {
+        return inscrits;
+    }
+
+    public void setInscrits(ArrayList<String> inscrits) {
+        this.inscrits = inscrits;
     }
 
     public void setPlaces(String places) {

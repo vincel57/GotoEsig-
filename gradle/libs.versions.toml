@@ -10,6 +10,7 @@ constraintlayout = "2.2.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.1.1"
 okhttp = "4.9.1"
+osmdroid = "6.1.14"
 
 
 [libraries]
@@ -22,6 +23,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 okhttp = {group = "com.squareup.okhttp3", name = "okhttp", version.ref ="okhttp"}
+osmdroid = {group ="org.osmdroid", name ="osmdroid-android", version.ref="osmdroid"}
 
 
 

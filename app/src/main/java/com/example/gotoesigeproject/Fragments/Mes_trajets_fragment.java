@@ -1,5 +1,6 @@
-package com.example.gotoesigeproject;
+package com.example.gotoesigeproject.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -10,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
 
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gotoesigeproject.Adapter.TrajetAdapter;
+import com.example.gotoesigeproject.R;
+import com.example.gotoesigeproject.Model.Trajet;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -44,6 +47,7 @@ public class Mes_trajets_fragment extends Fragment {
     public Mes_trajets_fragment() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -76,66 +80,38 @@ public class Mes_trajets_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_mes_trajets_fragment, container, false);
 
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("SessionUtilisateur", getContext().MODE_PRIVATE);
+        String nom = sharedPreferences.getString("nom", "");
+        String prenom = sharedPreferences.getString("prenom", "");
+        String email = sharedPreferences.getString("email", "");
+        recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         trajets = new ArrayList<>();
-        setupAdapter(); // Configure l'Adapter dans le Fragment
-        loadTrajetsFromFirestore();
+        TrajetAdapter adapter = new TrajetAdapter(trajets);
+        recyclerView.setAdapter(adapter);
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("trajets")
+                .whereArrayContains("inscrits", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Trajet trajet = document.toObject(Trajet.class);
+                            trajets.add(trajet);
+                        }
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(getContext(), "Erreur lors du chargement des trajets", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         return view;
     }
 
-    private void setupAdapter() {
-        // Adapter défini directement dans le Fragment
-        RecyclerView.Adapter adapter = new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                // Charger le layout de l'élément
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_mes_trajets_fragment, parent, false);
-                return new RecyclerView.ViewHolder(view) {};
-            }
 
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                // Remplir les données dans les vues
-                Trajet trajet = trajets.get(position);
-
-                TextView pointDepartArrivee = holder.itemView.findViewById(R.id.point_depart_arrivee);
-                TextView dateHeure = holder.itemView.findViewById(R.id.date_heure);
-                TextView dureeTotale = holder.itemView.findViewById(R.id.duree_totale);
-
-                pointDepartArrivee.setText(trajet.getPointDepart() + " ➜ ESIGELEC");
-                dateHeure.setText(trajet.getDate() + " à " + trajet.getHeure());
-                dureeTotale.setText("Durée totale : " + trajet.getDuree());
-            }
-
-            @Override
-            public int getItemCount() {
-                return trajets.size();
-            }
-        };
-
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void loadTrajetsFromFirestore() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("trajets")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    trajets.clear(); // Nettoyer la liste existante
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        Trajet trajet = document.toObject(Trajet.class);
-                        trajets.add(trajet);
-                    }
-                    recyclerView.getAdapter().notifyDataSetChanged(); // Mettre à jour l'Adapter
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Erreur : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-    }
 }

@@ -1,4 +1,4 @@
-package com.example.gotoesigeproject;
+package com.example.gotoesigeproject.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.gotoesigeproject.Model.Utilisateur;
+import com.example.gotoesigeproject.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Inscription extends AppCompatActivity {

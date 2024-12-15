@@ -1,4 +1,4 @@
-package com.example.gotoesigeproject;
+package com.example.gotoesigeproject.Fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
+import com.example.gotoesigeproject.R;
+import com.example.gotoesigeproject.Model.Trajet;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -29,19 +31,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -220,6 +215,8 @@ editEmail.setText(email);
                     String duree = editDuration.getText().toString();
                     String distanceK = editDistance.getText().toString();
                     String mail = editEmail.getText().toString();
+                    ArrayList<String> inscrits = new ArrayList<>();
+                    inscrits.add(mail);
 
 
                     // Étape 3 : Confirmation avant l'ajout
@@ -229,7 +226,7 @@ editEmail.setText(email);
                             .setPositiveButton("Oui", (dialog, which) -> {
                                 // Ajouter les données à Firestore
                                 firestore.collection("trajets")
-                                        .add(new Trajet(pointDepart, date, heure, retardTolere, places, contribution, duree, distanceK, mail))
+                                        .add(new Trajet(pointDepart, date, heure, retardTolere, places, contribution, duree, distanceK, mail, inscrits))
                                         .addOnSuccessListener(documentReference -> {
                                             Toast.makeText(requireContext(), "Trajet ajouté avec succès", Toast.LENGTH_SHORT).show();
                                         })
